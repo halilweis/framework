@@ -136,7 +136,10 @@
                         <td><?= $todo->userName ?></td>
                         <td><?= $todo->email ?></td>
                         <td><?= $todo->taskText ?></td>
-                        <td><?= $todo->status ? 'Completed' : 'Not Completed' ?></td>
+                        <td><?= $todo->status ? 'Completed' : 'Not Completed' ?>
+                            <?php if($todo->isEdited>0):?> ,Edited by admin
+                            <?php endif; ?>
+                        </td>
                         <?php if ($data['loggedIn']):?>
                         <td><a href="/framework/public/pages/edit?id=<?= $todo->id ?>">Edit</a> </td>
                         <?php endif; ?>
