@@ -25,8 +25,18 @@
         }
         public function updateData($data)
         {
-            $this->db->query("UPDATE todo SET taskText = '".$data['task']."', status = '".$data['status']."' 
-            WHERE id='".$data['id']."'");
+            $this->db->query("SELECT * FROM todo WHERE id='".$data['id']."'");
+            $result = $this->db->single();
+
+            if ($result->taskText!=$data['task'])
+            {
+            $this->db->query("UPDATE todo SET taskText = '".$data['task']."', status = '".$data['status']."',
+            isEdited = 1 WHERE id='".$data['id']."'");
+            }
+            else
+                $this->db->query("UPDATE todo SET taskText = '".$data['task']."', status = '".$data['status']."',
+                WHERE id='".$data['id']."'");
+
             return $this->db->execute();
         }
 
